@@ -1,6 +1,8 @@
 module.exports = function(grunt) {
     "use strict";
 
+    var compaginatorBanner = '/* Compaginator v' + grunt.file.readJSON('package.json').version + ' */';
+
     grunt.initConfig({
 
         pkg: grunt.file.readJSON('package.json'),
@@ -36,14 +38,28 @@ module.exports = function(grunt) {
                     {expand: true, flatten: true, src: ['dist/compaginator.min.js'], dest: 'examples/jquery/lib'}
                 ]
             }
+        },
+
+        concat: {
+            dev: {
+                options: { banner: compaginatorBanner + "\r\n" },
+                src: 'dist/compaginator.js',
+                dest: 'dist/compaginator.js'
+            },
+            prod: {
+                options: { banner: compaginatorBanner },
+                src: 'dist/compaginator.min.js',
+                dest: 'dist/compaginator.min.js'
+            }
         }
     });
 
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-coffee');
     grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-concat');
 
     grunt.registerTask('default', ['build_tests', 'build']);
-    grunt.registerTask('build', ['coffee:build', 'uglify', 'copy']);
+    grunt.registerTask('build', ['coffee:build', 'uglify', 'concat', 'copy']);
     grunt.registerTask('build_tests', ['coffee:tests']);
 };
