@@ -1,3 +1,4 @@
+/* Compaginator v0.0.1 */
 (function() {
   if (window.Compaginator == null) {
     window.Compaginator = {};
