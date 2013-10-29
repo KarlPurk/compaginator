@@ -92,7 +92,19 @@
 <td>Returns the subset of pages to render in the view.</td>
 </tr>
 </tbody>
-</table>
+</table><h4>
+<a name="example-coffeescript" class="anchor" href="#example-coffeescript"><span class="octicon octicon-link"></span></a>Example (CoffeeScript)</h4>
+
+<div class="highlight highlight-coffee"><pre><span class="nv">paginator = </span><span class="k">new</span> <span class="nx">Compaginator</span><span class="p">.</span><span class="nx">Model</span><span class="p">()</span>
+<span class="nx">paginator</span><span class="p">.</span><span class="nx">setNumPages</span> <span class="mi">100</span>
+<span class="nx">paginator</span><span class="p">.</span><span class="nx">setNumPagesDisplayed</span> <span class="mi">10</span>
+<span class="nx">paginator</span><span class="p">.</span><span class="nx">setNumPagesAnchored</span> <span class="mi">2</span>
+<span class="nx">paginator</span><span class="p">.</span><span class="nx">setCurrentPage</span> <span class="mi">10</span>
+<span class="nv">pages = </span><span class="nx">paginator</span><span class="p">.</span><span class="nx">getDisplayPages</span><span class="p">()</span>
+
+<span class="c1"># logs [1, 2, ..., 8, 9, 10, 11, 12, ..., 99, 100]</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="nx">pages</span><span class="p">.</span><span class="nx">map</span> <span class="nf">(page) -&gt;</span> <span class="k">return</span> <span class="nx">page</span><span class="p">.</span><span class="nx">page</span>
+</pre></div>
       </section>
       <footer>
         <p>This project is maintained by <a href="https://github.com/KarlPurk">KarlPurk</a></p>
