@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Compaginator by KarlPurk</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Compaginator</h1>
+        <p>A framework agnostic JavaScript pagination component written in CoffeeScript.</p>
+
+        <p class="view"><a href="https://github.com/KarlPurk/compaginator">View the Project on GitHub <small>KarlPurk/compaginator</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/KarlPurk/compaginator/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/KarlPurk/compaginator/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/KarlPurk/compaginator">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h3>
+<a name="welcome-to-compaginator" class="anchor" href="#welcome-to-compaginator"><span class="octicon octicon-link"></span></a>Welcome to Compaginator</h3>
+
+<p>A framework agnostic JavaScript pagination component written in CoffeeScript.</p>
+
+<h3>
+<a name="philosophy" class="anchor" href="#philosophy"><span class="octicon octicon-link"></span></a>Philosophy</h3>
+
+<p>Compaginator separates presentation from business logic in order to provide flexibility.  This is achieved by creating a single model that encapsulates the common pagination business logic, and then providing library/framework specific views for easy integration into existing code bases - regardless of underlying architecture.</p>
+
+<p>This means that you should familiarise yourself with the core compaginator model, and then read the documentation relating to the view for your target library/framework.</p>
+
+<h3>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h3>
+
+<p>Include the compaginator.min.js or compaginator.js file on your page.  </p>
+
+<div class="highlight highlight-html"><pre><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">src=</span><span class="s">"compaginator.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+</pre></div>
+
+<h3>
+<a name="compaginatormodel" class="anchor" href="#compaginatormodel"><span class="octicon octicon-link"></span></a>Compaginator.Model</h3>
+
+<p>This class represents the core compaginator model.  The following methods form the public API for this class.</p>
+
+<table>
+<thead><tr>
+<th>Method</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>setCurrentPage(number)</td>
+<td>Set the current page of the paginator.</td>
+</tr>
+<tr>
+<td>setNextPage()</td>
+<td>Set the next page as the current page.</td>
+</tr>
+<tr>
+<td>setPrevPage()</td>
+<td>Set the prev page as the current page.</td>
+</tr>
+<tr>
+<td>setNumPagesDisplayed(number)</td>
+<td>Set the number of pages to be displayed when rendered.</td>
+</tr>
+<tr>
+<td>setNumPagesAnchored(number)</td>
+<td>Set the number of pages to anchor at the start &amp; end.</td>
+</tr>
+<tr>
+<td>setNumPages(number)</td>
+<td>Set the total number of pages to paginate.</td>
+</tr>
+<tr>
+<td>getCurrentPage()</td>
+<td>Returns the current page number.</td>
+</tr>
+<tr>
+<td>getDisplayPages()</td>
+<td>Returns the subset of pages to render in the view.</td>
+</tr>
+</tbody>
+</table>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/KarlPurk">KarlPurk</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
