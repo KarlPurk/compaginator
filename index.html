@@ -31,28 +31,28 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-        <h3>
-<a name="welcome-to-compaginator" class="anchor" href="#welcome-to-compaginator"><span class="octicon octicon-link"></span></a>Welcome to Compaginator</h3>
+        <h1>
+<a name="welcome-to-compaginator" class="anchor" href="#welcome-to-compaginator"><span class="octicon octicon-link"></span></a>Welcome to Compaginator</h1>
 
 <p>A framework agnostic JavaScript pagination component written in CoffeeScript.</p>
 
-<h3>
-<a name="philosophy" class="anchor" href="#philosophy"><span class="octicon octicon-link"></span></a>Philosophy</h3>
+<h1>
+<a name="philosophy" class="anchor" href="#philosophy"><span class="octicon octicon-link"></span></a>Philosophy</h1>
 
 <p>Compaginator separates presentation from business logic in order to provide flexibility.  This is achieved by creating a single model that encapsulates the common pagination business logic, and then providing library/framework specific views for easy integration into existing code bases - regardless of underlying architecture.</p>
 
 <p>This means that you should familiarise yourself with the core compaginator model, and then read the documentation relating to the view for your target library/framework.</p>
 
-<h3>
-<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h3>
+<h1>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h1>
 
 <p>Include the compaginator.min.js or compaginator.js file on your page.  </p>
 
 <div class="highlight highlight-html"><pre><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">src=</span><span class="s">"compaginator.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
 </pre></div>
 
-<h3>
-<a name="compaginatormodel" class="anchor" href="#compaginatormodel"><span class="octicon octicon-link"></span></a>Compaginator.Model</h3>
+<h1>
+<a name="compaginatormodel" class="anchor" href="#compaginatormodel"><span class="octicon octicon-link"></span></a>Compaginator.Model</h1>
 
 <p>This class represents the core compaginator model.  The following methods form the public API for this class.</p>
 
@@ -99,8 +99,8 @@
 <td>Observes the specified event and calls the callback whenever the event occurs.</td>
 </tr>
 </tbody>
-</table><h4>
-<a name="events" class="anchor" href="#events"><span class="octicon octicon-link"></span></a>Events</h4>
+</table><h2>
+<a name="events" class="anchor" href="#events"><span class="octicon octicon-link"></span></a>Events</h2>
 
 <table>
 <thead><tr>
@@ -111,8 +111,8 @@
 <td>page-changed</td>
 <td>Triggered whenever the current page is changed.</td>
 </tr></tbody>
-</table><h4>
-<a name="example-coffeescript" class="anchor" href="#example-coffeescript"><span class="octicon octicon-link"></span></a>Example (CoffeeScript)</h4>
+</table><h2>
+<a name="example-coffeescript" class="anchor" href="#example-coffeescript"><span class="octicon octicon-link"></span></a>Example (CoffeeScript)</h2>
 
 <div class="highlight highlight-coffee"><pre><span class="nv">paginator = </span><span class="k">new</span> <span class="nx">Compaginator</span><span class="p">.</span><span class="nx">Model</span><span class="p">()</span>
 <span class="nx">paginator</span><span class="p">.</span><span class="nx">setNumPages</span> <span class="mi">100</span>
@@ -124,6 +124,15 @@
 <span class="c1"># logs [1, 2, ..., 8, 9, 10, 11, 12, ..., 99, 100]</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="nx">pages</span><span class="p">.</span><span class="nx">map</span> <span class="nf">(page) -&gt;</span> <span class="k">return</span> <span class="nx">page</span><span class="p">.</span><span class="nx">page</span>
 </pre></div>
+
+<h1>
+<a name="implementations" class="anchor" href="#implementations"><span class="octicon octicon-link"></span></a>Implementations</h1>
+
+<p>Currently there are example implementations for the following frameworks/libraries:</p>
+
+<ul>
+<li>jQuery</li>
+</ul><p>Support for other frameworks &amp; libraries will be coming soon. Until then you can refer to the jQuery implementation for guidance.</p>
       </section>
     </div>
 
