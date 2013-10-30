@@ -91,26 +91,6 @@
       this.setNumPagesAnchored(2);
     }
 
-    Model.prototype.getDisplayPages = function() {
-      var filteredPages, firstPages, lastPages, pages, _i, _ref, _results,
-        _this = this;
-      pages = (function() {
-        _results = [];
-        for (var _i = 1, _ref = this._numPages; 1 <= _ref ? _i <= _ref : _i >= _ref; 1 <= _ref ? _i++ : _i--){ _results.push(_i); }
-        return _results;
-      }).apply(this);
-      firstPages = pages.slice(0, this._numPagesAnchored);
-      lastPages = pages.slice(-this._numPagesAnchored);
-      filteredPages = pages.slice(this._numPagesAnchored, -this._numPagesAnchored);
-      if (this._requiresTruncation(this._numPages, this._numPagesDisplayed)) {
-        filteredPages = this._truncate(filteredPages, this._currentPage, this._numPageHoldersAvailable(this._numPagesDisplayed, this._numPagesAnchored));
-      }
-      filteredPages = firstPages.concat(filteredPages.concat(lastPages));
-      return filteredPages.map(function(page) {
-        return _this._createPage(page, _this._currentPage);
-      });
-    };
-
     /*
       Truncate a collection of pages.
     */
@@ -218,6 +198,31 @@
     */
 
 
+    /*
+      Returns a subset of pages for display
+    */
+
+
+    Model.prototype.getDisplayPages = function() {
+      var filteredPages, firstPages, lastPages, pages, _i, _ref, _results,
+        _this = this;
+      pages = (function() {
+        _results = [];
+        for (var _i = 1, _ref = this._numPages; 1 <= _ref ? _i <= _ref : _i >= _ref; 1 <= _ref ? _i++ : _i--){ _results.push(_i); }
+        return _results;
+      }).apply(this);
+      firstPages = pages.slice(0, this._numPagesAnchored);
+      lastPages = pages.slice(-this._numPagesAnchored);
+      filteredPages = pages.slice(this._numPagesAnchored, -this._numPagesAnchored);
+      if (this._requiresTruncation(this._numPages, this._numPagesDisplayed)) {
+        filteredPages = this._truncate(filteredPages, this._currentPage, this._numPageHoldersAvailable(this._numPagesDisplayed, this._numPagesAnchored));
+      }
+      filteredPages = firstPages.concat(filteredPages.concat(lastPages));
+      return filteredPages.map(function(page) {
+        return _this._createPage(page, _this._currentPage);
+      });
+    };
+
     Model.prototype.setNumPagesAnchored = function(numPagesAnchored) {
       return this._numPagesAnchored = this._limitNumPagesAnchored(numPagesAnchored, this._numPagesDisplayed);
     };
@@ -233,7 +238,7 @@
 
     Model.prototype.setCurrentPage = function(page) {
       this._currentPage = +page;
-      return this.trigger('page-changed', this._currentPage);
+      return this._trigger('page-changed', this._currentPage);
     };
 
     Model.prototype.setNextPage = function() {
@@ -262,6 +267,20 @@
       } else {
         return true;
       }
+    };
+
+    /*
+      Observe the specified event and invoke the callback
+      function when the event occurs.
+    */
+
+
+    Model.prototype.observe = function(event, cb, context) {
+      return this.observers.push({
+        event: event,
+        cb: cb,
+        context: context
+      });
     };
 
     /*
@@ -312,15 +331,7 @@
       };
     };
 
-    Model.prototype.observe = function(event, cb, context) {
-      return this.observers.push({
-        event: event,
-        cb: cb,
-        context: context
-      });
-    };
-
-    Model.prototype.trigger = function(event, data) {
+    Model.prototype._trigger = function(event, data) {
       var notifyObserver, observer, _i, _len, _ref, _results,
         _this = this;
       notifyObserver = function(observer) {

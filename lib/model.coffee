@@ -7,38 +7,10 @@ class window.Compaginator.Model
     @setNumPagesDisplayed 11
     @setNumPagesAnchored 2
 
-  # Returns a subset of pages for display
-  getDisplayPages: ->
-
-    # Create array of pages ranging from 1 to X
-    pages = [1..@_numPages]
-
-    # Reserve the first X pages
-    firstPages = pages.slice 0, @_numPagesAnchored
-
-    # Reserve the last X pages
-    lastPages = pages.slice -@_numPagesAnchored
-
-    # Reduce pages collection, removing previously reserved pages
-    filteredPages = pages.slice @_numPagesAnchored, -@_numPagesAnchored
-
-    # Truncate the pages if required
-    if @_requiresTruncation @_numPages, @_numPagesDisplayed
-      filteredPages = @_truncate  filteredPages,
-        @_currentPage,
-        @_numPageHoldersAvailable(@_numPagesDisplayed, @_numPagesAnchored)
-
-    # concatanate pages
-    filteredPages = firstPages.concat filteredPages.concat lastPages
-
-    # Map each page to an object
-    filteredPages.map (page) => @_createPage page, @_currentPage
-
   ###
     Truncate a collection of pages.
   ###
   _truncate: (pages, currentPage, available) ->
-
 
     {output, before, after} = @_splitPages pages, currentPage
 
@@ -144,6 +116,35 @@ class window.Compaginator.Model
      Public Interface/API
   ###
 
+  ###
+    Returns a subset of pages for display
+  ###
+  getDisplayPages: ->
+
+    # Create array of pages ranging from 1 to X
+    pages = [1..@_numPages]
+
+    # Reserve the first X pages
+    firstPages = pages.slice 0, @_numPagesAnchored
+
+    # Reserve the last X pages
+    lastPages = pages.slice -@_numPagesAnchored
+
+    # Reduce pages collection, removing previously reserved pages
+    filteredPages = pages.slice @_numPagesAnchored, -@_numPagesAnchored
+
+    # Truncate the pages if required
+    if @_requiresTruncation @_numPages, @_numPagesDisplayed
+      filteredPages = @_truncate  filteredPages,
+        @_currentPage,
+        @_numPageHoldersAvailable(@_numPagesDisplayed, @_numPagesAnchored)
+
+    # concatanate pages
+    filteredPages = firstPages.concat filteredPages.concat lastPages
+
+    # Map each page to an object
+    filteredPages.map (page) => @_createPage page, @_currentPage
+
   setNumPagesAnchored: (numPagesAnchored) ->
     @_numPagesAnchored = @_limitNumPagesAnchored(numPagesAnchored, @_numPagesDisplayed)
 
@@ -156,15 +157,15 @@ class window.Compaginator.Model
 
   setCurrentPage: (page) ->
     @_currentPage = +page
-    @trigger 'page-changed', @_currentPage
+    @_trigger 'page-changed', @_currentPage
 
   setNextPage: ->
-    @setCurrentPage(@_currentPage + 1)
+    @setCurrentPage (@_currentPage + 1)
 
   setPrevPage: ->
-    @setCurrentPage(@_currentPage - 1)
+    @setCurrentPage (@_currentPage - 1)
 
-  getCurrentPage: () ->
+  getCurrentPage: ->
     @_currentPage
 
   nextActive: ->
@@ -172,6 +173,13 @@ class window.Compaginator.Model
 
   prevActive: ->
     if @_currentPage is 1 then false else true
+
+  ###
+    Observe the specified event and invoke the callback
+    function when the event occurs.
+  ###
+  observe: (event, cb, context) ->
+    @observers.push event: event, cb: cb, context: context
 
   ###
     Helper methods
@@ -203,10 +211,7 @@ class window.Compaginator.Model
     active: if currentPage is page then true else false
     disabled: if page is '...' then true else false
 
-  observe: (event, cb, context) ->
-    @observers.push event: event, cb: cb, context: context
-
-  trigger: (event, data) ->
+  _trigger: (event, data) ->
     notifyObserver = (observer) =>
       if observer.event is event
         observer.cb.call observer.context ? @, data
