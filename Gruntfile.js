@@ -67,8 +67,8 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-jasmine');
 
-    grunt.registerTask('default', ['build_tests', 'build']);
+    grunt.registerTask('default', ['test']);
     grunt.registerTask('build', ['coffee:build', 'uglify', 'concat', 'copy']);
     grunt.registerTask('build_tests', ['coffee:tests']);
-    grunt.registerTask('test', ['jasmine'])
+    grunt.registerTask('test', ['build', 'build_tests', 'jasmine'])
 };
