@@ -51,6 +51,13 @@ module.exports = function(grunt) {
                 src: 'dist/compaginator.min.js',
                 dest: 'dist/compaginator.min.js'
             }
+        },
+
+        jasmine: {
+            src: 'dist/compaginator.js',
+            options: {
+                specs: 'spec/*spec.js'
+            }
         }
     });
 
@@ -58,8 +65,10 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-coffee');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-contrib-jasmine');
 
     grunt.registerTask('default', ['build_tests', 'build']);
     grunt.registerTask('build', ['coffee:build', 'uglify', 'concat', 'copy']);
     grunt.registerTask('build_tests', ['coffee:tests']);
+    grunt.registerTask('test', ['jasmine'])
 };
