@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/KarlPurk/jsmapper.png)](https://travis-ci.org/KarlPurk/compaginator)
+
 Compaginator
 =================
 
