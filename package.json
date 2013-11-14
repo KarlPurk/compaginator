@@ -1,0 +1,20 @@
+{
+  "name": "compaginator",
+  "version": "0.0.1",
+  "author": "Karl Purkhardt",
+  "description": "A framework agnostic JavaScript pagination component written in CoffeeScript.",
+  "dependencies": {},
+  "optionalDependencies": {},
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-cli": "~0.1.9",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-uglify": "~0.2.2",
+    "grunt-contrib-copy": "~0.4.1",
+    "grunt-contrib-coffee": "~0.7.0",
+    "grunt-contrib-jasmine": "~0.5.2"
+  },
+  "scripts": {
+    "test": "grunt test"
+  }
+}
