@@ -1,8 +1,15 @@
 /* Compaginator v0.0.1 */
 (function() {
+  var Template;
+
   if (window.Compaginator == null) {
     window.Compaginator = {};
   }
+
+  /*
+    Renders a pagination control using jQuery.
+  */
+
 
   window.Compaginator.JqueryView = (function() {
     function JqueryView(paginator, cssSelector) {
@@ -10,8 +17,9 @@
     }
 
     JqueryView.prototype.render = function(paginator, cssSelector) {
-      var el, html;
-      html = this.constructor._renderPagination(paginator);
+      var el, html, template;
+      template = new Template.Default();
+      html = template.render(paginator);
       el = $(cssSelector);
       el.html(html);
       return this._initEvents(paginator, cssSelector);
@@ -32,19 +40,35 @@
       });
     };
 
-    JqueryView._renderPagination = function(paginator) {
+    return JqueryView;
+
+  })();
+
+  Template = {};
+
+  /*
+    Renders a template using hardcoded strings.
+    This template isn't very flexible but it works
+    well with bootstrap out of the box.
+  */
+
+
+  Template.Default = (function() {
+    function Default() {}
+
+    Default.prototype.render = function(paginator) {
       var html,
         _this = this;
-      html = '<ul class="pagination pagination-lg">';
-      html += this._renderPrevious(paginator);
+      html = '<ul class="pagination">';
+      html += this.renderPrevious(paginator);
       $.each(paginator.getDisplayPages(), function(index, page) {
-        return html += _this._renderPage(page);
+        return html += _this.renderPage(page);
       });
-      html += this._renderNext(paginator);
+      html += this.renderNext(paginator);
       return html += '</ul>';
     };
 
-    JqueryView._renderPage = function(page) {
+    Default.prototype.renderPage = function(page) {
       if (page.active === true) {
         return '<li class="active"><a href="#">' + page.page + '</a></li>';
       } else {
@@ -56,7 +80,7 @@
       }
     };
 
-    JqueryView._renderPrevious = function(paginator) {
+    Default.prototype.renderPrevious = function(paginator) {
       if (paginator.prevActive()) {
         return '<li class="previous"><a href="#">Previous</a></li>';
       } else {
@@ -64,7 +88,7 @@
       }
     };
 
-    JqueryView._renderNext = function(paginator) {
+    Default.prototype.renderNext = function(paginator) {
       if (paginator.nextActive()) {
         return '<li class="next"><a href="#">Next</a></li>';
       } else {
@@ -72,7 +96,7 @@
       }
     };
 
-    return JqueryView;
+    return Default;
 
   })();
 

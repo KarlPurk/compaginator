@@ -1,4 +1,8 @@
 window.Compaginator ?= {}
+
+###
+  Renders a pagination control using jQuery.
+###
 class window.Compaginator.JqueryView
 
   constructor: (paginator, cssSelector) ->
@@ -6,7 +10,9 @@ class window.Compaginator.JqueryView
 
   render: (paginator, cssSelector) ->
 
-    html = @constructor._renderPagination(paginator)
+    template = new Template.Default()
+
+    html = template.render paginator
 
     el = $(cssSelector)
     el.html html
@@ -28,34 +34,43 @@ class window.Compaginator.JqueryView
       false
     )
 
-  @_renderPagination: (paginator) ->
+Template = {}
 
-    html = '<ul class="pagination pagination-lg">'
-    html += @_renderPrevious paginator
+###
+  Renders a template using hardcoded strings.
+  This template isn't very flexible but it works
+  well with bootstrap out of the box.
+###
+class Template.Default
+
+  render: (paginator) ->
+
+    html = '<ul class="pagination">'
+    html += @renderPrevious paginator
 
     $.each paginator.getDisplayPages(), (index, page) =>
-      html += @_renderPage page
+      html += @renderPage page
 
-    html += @_renderNext paginator
+    html += @renderNext paginator
 
     html += '</ul>'
 
-  @_renderPage: (page) ->
-      if page.active is true
-        '<li class="active"><a href="#">' + page.page + '</a></li>'
+  renderPage: (page) ->
+    if page.active is true
+      '<li class="active"><a href="#">' + page.page + '</a></li>'
+    else
+      if page.disabled is true
+        '<li class="disabled"><a href="#">' + page.page + '</a></li>'
       else
-        if page.disabled is true
-          '<li class="disabled"><a href="#">' + page.page + '</a></li>'
-        else
-          '<li class="clickable"><a href="#">' + page.page + '</a></li>'
+        '<li class="clickable"><a href="#">' + page.page + '</a></li>'
 
-  @_renderPrevious: (paginator) ->
+  renderPrevious: (paginator) ->
     if paginator.prevActive()
       '<li class="previous"><a href="#">Previous</a></li>'
     else
       '<li class="disabled"><a href="#">Previous</a></li>'
 
-  @_renderNext: (paginator) ->
+  renderNext: (paginator) ->
     if paginator.nextActive()
       '<li class="next"><a href="#">Next</a></li>'
     else
